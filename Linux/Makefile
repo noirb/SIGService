@@ -21,3 +21,6 @@ libSIGService.a: $(OBJ)
 
 libSIGService.so: $(OBJ)
 	$(CC) $(CFLAGS) -shared -o $@ $(OBJ) 
+
+clean:
+	@rm -rf $(TARGET) *.o *~

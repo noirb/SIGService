@@ -11,6 +11,7 @@
 //#include <boost/thread.hpp>
 //#include <boost/bind.hpp>
 
+
 namespace sigverse
 {
 	std::string IntToString(int x)
@@ -534,7 +535,9 @@ namespace sigverse
 			return NULL; 
 		}
 
-		view->setBuffer(imageBuff);
+		view->copyBuffer(imageBuff, imageSize);
+		delete [] imageBuff;
+
 		return view;
 	}
 
@@ -690,9 +693,10 @@ namespace sigverse
 		}
 		img->setFOVy(fov);
 		img->setAspectRatio(ar);
-		img->setBuffer(recvBuff);
-		//unsigned char *recvData = new unsigne
-		//ViewImage *img;
+
+		img->copyBuffer(recvBuff, recvSize);
+		delete [] recvBuff;
+
 		return img;
 	}
 
@@ -764,12 +768,11 @@ namespace sigverse
 
 		img->setFOVy(fov);
 		img->setAspectRatio(ar);
-		img->setBuffer(recvBuff);
-		//unsigned char *recvData = new unsigne
-		//ViewImage *img;
-		return img;
-		return NULL;
-	}
 
+		img->copyBuffer(recvBuff, recvSize);
+		delete [] recvBuff;
+
+		return img;
+	}
 };
 
