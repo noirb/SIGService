@@ -569,7 +569,9 @@ namespace sigverse
 			return nullptr; 
 		}
 
-		view->setBuffer(imageBuff);
+		view->copyBuffer(imageBuff, imageSize);
+		delete [] imageBuff;
+
 		return view;
 	}
 
@@ -735,9 +737,9 @@ namespace sigverse
 		}
 		img->setFOVy(fov);
 		img->setAspectRatio(ar);
-		img->setBuffer(recvBuff);
-		//unsigned char *recvData = new unsigne
-		//ViewImage *img;
+		img->copyBuffer(recvBuff, recvSize);
+		delete [] recvBuff;
+
 		return img;
 	}
 
@@ -815,11 +817,10 @@ namespace sigverse
 
 		img->setFOVy(fov);
 		img->setAspectRatio(ar);
-		img->setBuffer(recvBuff);
-		//unsigned char *recvData = new unsigne
-		//ViewImage *img;
+		img->copyBuffer(recvBuff, recvSize);
+		delete [] recvBuff;
+
 		return img;
 	}
-
 };
 

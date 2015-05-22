@@ -82,34 +82,34 @@ namespace sigverse
 		bi.biHeight = -getHeight();
 		bi.biPlanes = 1;
 		switch(m_info.getColorBitType()) {
-	case COLORBIT_24:
-		{
-			bi.biBitCount = 24; break;
-		}
-	case DEPTHBIT_8:
-		{
-			tmp = new char[m_buflen*3];
-			bi.biBitCount = 24;
-
-			int height = getHeight();
-			int width = getWidth();
-
-			for(int i = 0; i < height; i++){
-				for(int j = 0; j < width; j++){
-					int tmp_i = i*width+j;
-
-					char distance = m_buf[i*width+j];
-		
-					tmp[tmp_i*3]   = distance;
-					tmp[tmp_i*3+1] = distance;
-					tmp[tmp_i*3+2] = distance;
-
-				}
+			case COLORBIT_24:
+			{
+				bi.biBitCount = 24; break;
 			}
-			break;
-		}
-	default:
-		assert(0);
+			case DEPTHBIT_8:
+			{
+				tmp = new char[m_buflen*3];
+				bi.biBitCount = 24;
+
+				int height = getHeight();
+				int width = getWidth();
+
+				for(int i = 0; i < height; i++){
+					for(int j = 0; j < width; j++){
+						int tmp_i = i*width+j;
+
+						char distance = m_buf[i*width+j];
+		
+						tmp[tmp_i*3]   = distance;
+						tmp[tmp_i*3+1] = distance;
+						tmp[tmp_i*3+2] = distance;
+
+					}
+				}
+				break;
+			}
+			default:
+				assert(0);
 		}
 		int size = getBufferLength();
 
@@ -139,7 +139,6 @@ namespace sigverse
 
 		return true;
 	}
-
 }
 
 

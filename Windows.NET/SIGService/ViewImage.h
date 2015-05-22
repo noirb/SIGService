@@ -7,10 +7,10 @@
 
 namespace sigverse
 {
-
 	//typedef unsigned short ImageDataType;
 
-	enum ImageDataType{
+	enum ImageDataType
+	{
 		IMAGE_DATA_TYPE_ANY = 0,
 		IMAGE_DATA_WINDOWS_BMP,
 	};
@@ -18,13 +18,15 @@ namespace sigverse
 
 	//typedef unsigned short ColorBitType;
 
-	enum ColorBitType{
+	enum ColorBitType
+	{
 		COLORBIT_ANY = 0,
 		COLORBIT_24,
 		DEPTHBIT_8,
 	};
 
-	enum ImageDataSize {
+	enum ImageDataSize 
+	{
 		IMAGE_320X240 = 0,
 		IMAGE_320X1,
 	};
@@ -32,25 +34,24 @@ namespace sigverse
 	public ref class ViewImageInfo
 	{
 	private:
-		ImageDataType	m_dataType;
-		ColorBitType	m_cbType;
-		int		m_width;
-		int		m_height;
+		ImageDataType m_dataType;
+		ColorBitType  m_cbType;
+		int m_width;
+		int m_height;
 
 	public:
 		ViewImageInfo(ImageDataType dataType, ColorBitType cbType, ImageDataSize sz) : m_dataType(dataType), m_cbType(cbType)
 		{
-		
 			switch(sz) {
-	case IMAGE_320X240:
-		m_width = 320; m_height = 240;
-		break;
-	case IMAGE_320X1:
-		m_width = 320; m_height = 1;
-		break;
-	default:
-		assert(0);
-		break;
+				case IMAGE_320X240:
+					m_width = 320; m_height = 240;
+					break;
+				case IMAGE_320X1:
+					m_width = 320; m_height = 1;
+					break;
+				default:
+					assert(0);
+					break;
 			}
 		}
 		ViewImageInfo(ImageDataType dataType, ColorBitType cbType, int w, int h)
@@ -65,19 +66,21 @@ namespace sigverse
 		}
 		ImageDataType getDataType() { return m_dataType; }
 		ColorBitType  getColorBitType() { return m_cbType; }
-		int	      getWidth()  { return m_width; }
-		int	      getHeight() { return m_height; }
+		int  getWidth()  { return m_width; }
+		int  getHeight() { return m_height; }
 
-		int	getBytesPerOnePixel() {
+		int	getBytesPerOnePixel() 
+		{
 			int b;
-			switch(m_cbType) {
-	case COLORBIT_24:
-		b = 3; break;
-	case DEPTHBIT_8:
-		b = 1; break;
-	default:
-		assert(0);	// error
-		b = 0; break;
+			switch(m_cbType) 
+			{
+				case COLORBIT_24:
+					b = 3; break;
+				case DEPTHBIT_8:
+					b = 1; break;
+				default:
+					assert(0);	// error
+					b = 0; break;
 			}
 
 			return b;
@@ -88,9 +91,9 @@ namespace sigverse
 	public ref class ViewImage
 	{
 	private:
-		ViewImageInfo^	m_info;
-		char *		m_buf;
-		int		m_buflen;
+		ViewImageInfo^ m_info;
+		char *         m_buf;
+		int            m_buflen;
 	
 		double m_fov;
 		double m_ar;   //aspect ratio
@@ -102,7 +105,8 @@ namespace sigverse
 			m_buf = new char [m_buflen];
 		}
 
-		~ViewImage() {
+		~ViewImage() 
+		{
 			if (m_buf) {
 				delete [] m_buf; m_buf = 0;
 			}
@@ -112,7 +116,7 @@ namespace sigverse
 		// sekikawa(2007/10/12)
 		int getWidthBytes(int width, int bytesPerOnePixel);
 
-		int	calcBufferSize(ViewImageInfo ^info);
+		int calcBufferSize(ViewImageInfo ^info);
 
 	public:
 		const ViewImageInfo^ getInfo() { return m_info; }
@@ -120,8 +124,12 @@ namespace sigverse
 		int  getWidth() { return m_info->getWidth(); }
 		int  getHeight() { return m_info->getHeight(); }
 		char * getBuffer() { return m_buf; }
-		void setBuffer(char *buf) { m_buf = buf; }
-		int   getBufferLength() { return m_buflen; }
+		void copyBuffer(char *buf, int size)
+		{
+			if(size>m_buflen){ size=m_buflen; };
+			memcpy(m_buf, buf, size);
+		}
+		int  getBufferLength() { return m_buflen; }
 		void setFOVy(double fov){ m_fov = fov;} 
 		void setAspectRatio(double ar){ m_ar = ar;}
 		double getFOVy(){ return m_fov;} 
@@ -130,12 +138,11 @@ namespace sigverse
 
 		//virtual void setDimension(int n){} 
 
-        // sekikawa(2007/10/12)
-        // convert RGBA format to BGR and turn y-axis upside down
-        void setBitImageAsWindowsBMP(unsigned char *bitImage);
+		// sekikawa(2007/10/12)
+		// convert RGBA format to BGR and turn y-axis upside down
+		void setBitImageAsWindowsBMP(unsigned char *bitImage);
 
-        bool    saveAsWindowsBMP(const char *fname);
-
+		bool saveAsWindowsBMP(const char *fname);
 	};
 } // namespace sigverse
 #endif // ViewImage_h
