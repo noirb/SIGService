@@ -272,7 +272,7 @@ class LogBase
 {
 public:
 	
-	enum LogLevel{ERR=0, INFO, DEBUG, WARNING};
+	enum LogLevel{ ERR=0, WARN, INFO, DEBUG };
 
 
 
@@ -365,10 +365,10 @@ public:
 	};
 	
 	///
-	inline void warning(const char* msg)
+	inline void warn(const char* msg)
 	{
-		if(getLevel() < WARNING) return;
-		write(*m_writer, logLevelToStr(WARNING), msg);
+		if(getLevel() < WARN) return;
+		write(*m_writer, logLevelToStr(WARN), msg);
 	};
 
 	

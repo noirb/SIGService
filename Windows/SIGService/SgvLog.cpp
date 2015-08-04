@@ -133,21 +133,18 @@ void makeMsg(ostream& oss, const char* src, va_list& ap)
 //
 const char* logLevelToStr(const LogBase::LogLevel level)
 {
-	static const char* err = "ERR";
-	static const char* info = "INFO";
-	static const char* debug = "DEBUG";
-	static const char* warning = "WARNING";
+	static const char* err     = "ERR";
+	static const char* info    = "INFO";
+	static const char* debug   = "DEBUG";
+	static const char* warning = "WARN";
 	static const char* other = "?";
 
-	switch(level){
-	case Log::ERR:
-		return err;
-	case Log::INFO:
-		return info;
-	case Log::DEBUG:
-		return debug;
-	case Log::WARNING:
-		return warning;
+	switch(level)
+	{
+		case Log::ERR:  return err;
+		case Log::WARN: return warning;
+		case Log::INFO: return info;
+		case Log::DEBUG:return debug;
 	}
 
 	//
@@ -158,14 +155,21 @@ const char* logLevelToStr(const LogBase::LogLevel level)
 //
 Log::LogLevel StrToLogLevel(const string& levelStr)
 {
-	if(levelStr == "ERR"){
+	if(levelStr == "ERR")
+	{
 		return Log::ERR;
-	}else if(levelStr == "INFO"){
+	}
+	else if(levelStr == "INFO")
+	{
 		return  Log::INFO;
-	}else if(levelStr == "DEBUG"){
+	}
+	else if(levelStr == "DEBUG")
+	{
 		return Log::DEBUG;
-	}else if(levelStr == "WARNING"){
-		return Log::WARNING;
+	}
+	else if(levelStr == "WARN")
+	{
+		return Log::WARN;
 	}
 
 	//
