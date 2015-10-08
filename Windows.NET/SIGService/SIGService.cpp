@@ -33,7 +33,7 @@ namespace sigverse
 		this->m_from = all[0];
 
 		int msgSize = Convert::ToInt32(all[1]);
-		m_msg = gcnew String(all[2]->ToCharArray(0, msgSize));
+		m_msg = gcnew String(data->ToCharArray(size - msgSize, msgSize));
 		return true;
 	}
 
