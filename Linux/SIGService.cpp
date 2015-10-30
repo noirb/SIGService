@@ -272,7 +272,7 @@ namespace sigverse
 
 		memcpy(&fds, &readfds, sizeof(fd_set));
 
-		n = select(0, &fds, NULL, NULL, &tv);
+		n = select(FD_SETSIZE, &fds, NULL, NULL, &tv);
 
 		if (n == 0) {
 			return true;
