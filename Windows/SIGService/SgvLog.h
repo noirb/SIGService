@@ -29,6 +29,10 @@
 	#include <sys/stat.h>
 #endif
 
+/// HACK: Workaround DEBUG being used as enum here while CEGUI also defines it as '1'
+#ifdef DEBUG
+#undef DEBUG
+#endif
 
 using namespace std;
 using namespace boost;
