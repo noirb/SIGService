@@ -54,7 +54,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>
-        $(BUILD_BOOST_INC);
+        $(SIGBUILD_BOOST_INC);
         %(AdditionalIncludeDirectories)
       </AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -69,7 +69,7 @@
     <Lib>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
-        $(BUILD_BOOST_LIB);
+        $(SIGBUILD_BOOST_LIB);
         %(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
     </Lib>
@@ -79,7 +79,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>
-        $(BUILD_BOOST_INC);
+        $(SIGBUILD_BOOST_INC);
         %(AdditionalIncludeDirectories)
       </AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -93,7 +93,7 @@
     <Lib>
       <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
-        $(BUILD_BOOST_LIB);
+        $(SIGBUILD_BOOST_LIB);
         %(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
     </Lib>
